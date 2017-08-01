@@ -1,4 +1,10 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -16,9 +22,14 @@ export class CockpitComponent implements OnInit {
 
   @ViewChild('srvComponentInput') serverComponentInput: ElementRef;
 
-  constructor() { }
+  componentActionIndex = 0;
+
+  constructor() {
+    this.log('Constructor');
+  }
 
   ngOnInit() {
+
   }
 
   onAddServer(nameInput: HTMLInputElement)
@@ -31,4 +42,46 @@ export class CockpitComponent implements OnInit {
     this.blueprintCreated.emit({serverName: nameInput.value, serverContent: this.serverComponentInput.nativeElement.value});
   }
 
+  log( methodName: string)
+ {
+ this.componentActionIndex++;
+ console.log(methodName + ': ' + this.componentActionIndex);
+ }
+
+
+
+  /*ngOnChanges() {
+    this.log('ngOnChanges');
+  }
+
+ ngDoCheck()
+ {
+ this.log('ngDoCheck');
+ }
+
+ ngAfterContentInit()
+ {
+ this.log('ngAfterContentInit');
+ }
+
+ ngAfterContentCheck()
+ {
+ this.log('ngAfterContentCheck');
+ }
+
+ ngAfterViewInit()
+ {
+ this.log('ngAfterViewInit');
+ }
+
+ ngAfterViewChecked()
+ {
+ this.log('ngAfterViewChecked');
+ }
+
+ ngOnDestroy()
+ {
+ this.log('ngOnDestroy');
+ }
+ */
 }
